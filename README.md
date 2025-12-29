@@ -23,36 +23,37 @@ This project is part of my **QA Automation Portfolio** and demonstrates best pra
 ## 📂 Project Structure
 ```
 playwright-ecommerce-automation/
-├── tests/ # Test specifications
-│ ├── auth/ # Login & Registration tests
-│ │ ├── login.spec.js
-│ │ └── register.spec.js
-│ ├── product/ # Product-related tests
-│ │ └── product.spec.js
-│ ├── cart/ # Cart functionality tests
-│ │ └── cart.spec.js
-│ └── checkout/ # Checkout flow tests
-│ └── checkout.spec.js
+├── tests/                  # Test specifications
+│   ├── auth/               # Login & Registration tests
+│   │   ├── login.spec.js
+│   │   └── register.spec.js
+│   ├── product/            # Product-related tests
+│   │   └── product.spec.js
+│   ├── cart/               # Cart functionality tests
+│   │   └── cart.spec.js
+│   └── checkout/           # Checkout flow tests
+│       └── checkout.spec.js
 │
-├── pages/ # Page Object Model (POM)
-│ ├── home.page.js
-│ ├── login.page.js
-│ ├── register.page.js
-│ ├── product.page.js
-│ ├── cart.page.js
-│ └── checkout.page.js
+├── pages/                  # Page Object Model (POM)
+│   ├── home.page.js
+│   ├── login.page.js
+│   ├── register.page.js
+│   ├── product.page.js
+│   ├── cart.page.js
+│   └── checkout.page.js
 │
-├── fixtures/ # Test data (JSON)
-│ └── userData.json
+├── fixtures/               # Test data (JSON)
+│   └── userData.json
 │
-├── utils/ # Helper and utility functions
-│ └── testHelper.js
+├── utils/                  # Helper and utility functions
+│   └── testHelper.js
 │
-├── playwright.config.ts # Playwright configuration
+├── playwright.config.ts    # Playwright configuration
 ├── package.json
 ├── package-lock.json
 ├── .gitignore
 └── README.md
+
 ```
 ---
 
@@ -101,24 +102,16 @@ npx playwright test --ui
 npx playwright show-report
 ```
 
-📸 Test Artifacts
+## 📸 Test Artifacts
 - Screenshots on failure
 - Video recordings for failed tests
 - HTML execution reports
 
-🔄 CI/CD Integration
+## 🔄 CI/CD Integration
 This project uses GitHub Actions to automatically run tests on:
 - Push to main
 - Pull requests
 
-👤 Author
+## 👤 Author
 Carlos Miguel D. Tadifa
 QA Engineer | Automation & Manual Testing
-
-
-
-
-
-
-
-
