@@ -23,34 +23,31 @@ This project is part of my **QA Automation Portfolio** and demonstrates best pra
 ## 📂 Project Structure
 ```
 playwright-ecommerce-automation/
-├── tests/                  # Test specifications
-│   ├── auth/               # Login & Registration tests
-│   │   ├── login.spec.js
-│   │   └── register.spec.js
-│   ├── product/            # Product-related tests
-│   │   └── product.spec.js
-│   ├── cart/               # Cart functionality tests
-│   │   └── cart.spec.js
-│   └── checkout/           # Checkout flow tests
-│       └── checkout.spec.js
+├── tests/                  # Test specs
+│   ├── auth/               # Login & Registration
+│   │   ├── login.spec.ts
+│   │   └── register.spec.ts
+│   ├── product/
+│   │   └── product.spec.ts
+│   ├── cart/
+│   │   └── cart.spec.ts
+│   └── checkout/
+│       └── checkout.spec.ts
 │
-├── pages/                  # Page Object Model (POM)
-│   ├── home.page.js
-│   ├── login.page.js
-│   ├── register.page.js
-│   ├── product.page.js
-│   ├── cart.page.js
-│   └── checkout.page.js
+├── pages/                  # Page Objects
+│   ├── home.page.ts
+│   ├── login.page.ts
+│   ├── register.page.ts
+│   ├── product.page.ts
+│   ├── cart.page.ts
+│   └── checkout.page.ts
 │
-├── fixtures/               # Test data (JSON)
+├── fixtures/
 │   └── userData.json
-│
-├── utils/                  # Helper and utility functions
-│   └── testHelper.js
-│
-├── playwright.config.ts    # Playwright configuration
+├── utils/
+│   └── testHelper.ts
+├── playwright.config.ts
 ├── package.json
-├── package-lock.json
 ├── .gitignore
 └── README.md
 
