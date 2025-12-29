@@ -73,12 +73,15 @@ playwright-ecommerce-automation/
 npm install
 
 ### 2️⃣ Install Dependencies
+```bash
 npx playwright test
 
 ### 2️⃣ Install Dependencies
+```bash
 npx playwright test --ui
 
 ### 4️⃣ View HTML Report
+```bash
 npx playwright show-report
 
 ## 📸 Test Artifacts
@@ -94,3 +97,4 @@ This project uses GitHub Actions to automatically run tests on:
 ## 👤 Author
 Carlos Miguel D. Tadifa
 QA Engineer | Automation & Manual Testing
+
