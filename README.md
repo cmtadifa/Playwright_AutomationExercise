@@ -20,9 +20,8 @@ This project is part of my **QA Automation Portfolio** and demonstrates best pra
 - **Jenkins (CI/CD)**
 
 ---
-```
 ## 📂 Project Structure
-
+```
 playwright-ecommerce-automation/
 ├── tests/ # Test specifications
 │ ├── auth/ # Login & Registration tests
@@ -115,6 +114,7 @@ This project uses GitHub Actions to automatically run tests on:
 👤 Author
 Carlos Miguel D. Tadifa
 QA Engineer | Automation & Manual Testing
+
 
 
 
