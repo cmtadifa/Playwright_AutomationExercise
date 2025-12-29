@@ -15,9 +15,9 @@ This project is part of my **QA Automation Portfolio** and demonstrates best pra
 
 ## 🛠 Tech Stack
 - **Playwright**
-- **JavaScript (ES6)**
+- **Typescript**
 - **Node.js**
-- **GitHub Actions (CI/CD)**
+- **Jenkins (CI/CD)**
 
 ---
 
@@ -115,6 +115,7 @@ This project uses GitHub Actions to automatically run tests on:
 👤 Author
 Carlos Miguel D. Tadifa
 QA Engineer | Automation & Manual Testing
+
 
 
 
