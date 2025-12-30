@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "login": "npx playwright test tests/auth/login.spec.ts --headed",
+    "register": "npx playwright test tests/auth/register.spec.ts --headed",
+    "cart": "npx playwright test tests/features/addToCart.spec.ts --headed",
+    "checkout": "npx playwright test tests/features/checkout.spec.ts --headed",
+    "product": "npx playwright test tests/features/product.spec.ts --headed"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cmtadifa/Playwright_AutomationExercise.git"
