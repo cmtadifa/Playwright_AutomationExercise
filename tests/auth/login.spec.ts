@@ -1,32 +1,42 @@
 import { test } from '@playwright/test';
-import { homePage } from '../../pages/home.page';
+import { HomePage } from '../../pages/home.page';
 
 test.describe('User Login', () => {
-  test('should login with valid credentials', async ({ page }) => {
-    // test code here
-  });
 
-  test('Login with invalid password', async ({ page }) => {
-    // test code here
-  });
+  let hpage: HomePage;
 
-  test('Login with invalid email', async ({ page }) => {
-    // test code here
-  });
+    test.beforeEach(async ({ page }) => {
+        hpage = new HomePage(page);
+        await hpage.accessPage();
+      });
 
-  test('Login with empty email', async ({ page }) => {
-    // test code here
-  });
 
-  test('Login with empty password', async ({ page }) => {
-    // test code here
-  });
+      test('should login with valid credentials', async ({ page }) => {
+        // test code here
+        await hpage.selectNavLinks('Login');
+      });
 
-  test('Login with both empty', async ({ page }) => {
-    // test code here
-  });
+      // test('Login with invalid password', async ({ page }) => {
+      //   // test code here
+      // });
 
-  test('Login multiple times with invalid account', async ({ page }) => {
-    // test code here
-  });
+      // test('Login with invalid email', async ({ page }) => {
+      //   // test code here
+      // });
+
+      // test('Login with empty email', async ({ page }) => {
+      //   // test code here
+      // });
+
+      // test('Login with empty password', async ({ page }) => {
+      //   // test code here
+      // });
+
+      // test('Login with both empty', async ({ page }) => {
+      //   // test code here
+      // });
+
+      // test('Login multiple times with invalid account', async ({ page }) => {
+      //   // test code here
+      // });
 });
