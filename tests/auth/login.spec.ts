@@ -8,12 +8,13 @@ test.describe('User Login', () => {
     test.beforeEach(async ({ page }) => {
         hpage = new HomePage(page);
         await hpage.accessPage();
+        await hpage.selectNavLinks('Login');
       });
 
 
       test('should login with valid credentials', async ({ page }) => {
         // test code here
-        await hpage.selectNavLinks('Login');
+        
       });
 
       // test('Login with invalid password', async ({ page }) => {

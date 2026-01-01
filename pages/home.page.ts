@@ -16,6 +16,10 @@ export class HomePage {
       await this.page.click(`a:has-text("${linkText}")`);
     }
 
+    async selectUsernameField(): Promise<void> {
+      await this.page.locator('input[name="email"]'); // miggytest123@email.com
+    }
+
 }
 
 
