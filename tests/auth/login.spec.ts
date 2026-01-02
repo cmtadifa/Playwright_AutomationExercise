@@ -1,4 +1,5 @@
 import { test } from '@playwright/test';
+import userData from '../../fixtures/userData.json';
 import { HomePage } from '../../pages/home.page';
 
 test.describe('User Login', () => {
@@ -14,7 +15,7 @@ test.describe('User Login', () => {
 
       test('should login with valid credentials', async ({ page }) => {
         // test code here
-        
+        await hpage.selectUsernameField(userData.user1.email);
       });
 
       // test('Login with invalid password', async ({ page }) => {
