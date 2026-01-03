@@ -15,7 +15,8 @@ test.describe('User Login', () => {
 
       test('should login with valid credentials', async ({ page }) => {
         // test code here
-        await hpage.selectUsernameField(userData.user1.email);
+        await hpage.enterUsernameField(userData.user1.email);
+        await hpage.enterPasswordField(userData.user1.password);
       });
 
       // test('Login with invalid password', async ({ page }) => {
