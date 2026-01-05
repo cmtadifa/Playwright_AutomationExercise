@@ -1,22 +1,28 @@
 import { test } from '@playwright/test';
 import userData from '../../fixtures/userData.json';
 import { HomePage } from '../../pages/home.page';
+import { LoginPage } from '../../pages/login.page';
 
 test.describe('User Login', () => {
 
   let hpage: HomePage;
+  let lpage: LoginPage;
 
     test.beforeEach(async ({ page }) => {
         hpage = new HomePage(page);
+        lpage = new LoginPage(page);
         await hpage.accessPage();
-        await hpage.selectNavLinks('Login');
+        await hpage.clickNavLinks('Login');
       });
 
 
       test('should login with valid credentials', async ({ page }) => {
         // test code here
-        await hpage.enterUsernameField(userData.user1.email);
-        await hpage.enterPasswordField(userData.user1.password);
+        await lpage.enterUsernameField(userData.user1.email);
+        await lpage.enterPasswordField(userData.user1.password);
+        await lpage.clickLoginButton();
+        await hpage.checkNavLinkVisible('Logout');
+        await page.pause();
       });
 
       // test('Login with invalid password', async ({ page }) => {

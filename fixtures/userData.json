@@ -1,9 +1,9 @@
 {
     "user1": {
         "id": 1,
-        "Fname": "Miggy",
+        "Fname": "Migs",
         "Lname": "Test",
-        "email": "miggytest123@email.com",
-        "password": "Miggytest123"
+        "email": "migstest123@email.com",
+        "password": "migstest123"
     }
 }
