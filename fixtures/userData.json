@@ -5,5 +5,12 @@
         "Lname": "Test",
         "email": "migstest123@email.com",
         "password": "migstest123"
+    },
+    "user2": {
+        "id": 2,
+        "Fname": "John",
+        "Lname": "Doe",
+        "email": "johndoe@email.com",
+        "password": "johndoe123"
     }
 }

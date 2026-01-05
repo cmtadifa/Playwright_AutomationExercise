@@ -16,16 +16,19 @@ test.describe('User Login', () => {
       });
 
 
-      test('should login with valid credentials', async ({ page }) => {
+      test('should login with valid credentials', async () => {
         await lpage.enterUsernameField(userData.user1.email);
         await lpage.enterPasswordField(userData.user1.password);
         await lpage.clickLoginButton();
         await hpage.expectNavLinkVisible('Logout');
       });
 
-      // test('Login with invalid password', async ({ page }) => {
-      //   // test code here
-      // });
+      test('Login with invalid email and password', async () => {
+        await lpage.enterUsernameField(userData.user2.email);
+        await lpage.enterPasswordField(userData.user2.password);
+        await lpage.clickLoginButton();
+        await lpage.expectLoginErrorVisible();
+      });
 
       // test('Login with invalid email', async ({ page }) => {
       //   // test code here
