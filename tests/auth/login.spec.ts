@@ -17,12 +17,10 @@ test.describe('User Login', () => {
 
 
       test('should login with valid credentials', async ({ page }) => {
-        // test code here
         await lpage.enterUsernameField(userData.user1.email);
         await lpage.enterPasswordField(userData.user1.password);
         await lpage.clickLoginButton();
-        await hpage.checkNavLinkVisible('Logout');
-        await page.pause();
+        await hpage.expectNavLinkVisible('Logout');
       });
 
       // test('Login with invalid password', async ({ page }) => {

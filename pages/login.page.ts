@@ -16,20 +16,21 @@ export class LoginPage {
     this.eAddress = loginForm.getByRole('textbox', { name: 'Email Address' });
     this.password = loginForm.getByRole('textbox', { name: 'Password' });
     this.btnLogin = page.getByRole('button', { name: 'Login' });
-    
   }
 
-    async enterUsernameField(userName: string): Promise<void> {
-      await this.eAddress.fill(userName); 
-    }
+  async enterUsernameField(userName: string): Promise<void> {
+    await this.eAddress.fill(userName); 
+  }
 
-    async enterPasswordField(password: string): Promise<void> {
-      await this.password.fill(password); 
-    }
+  async enterPasswordField(password: string): Promise<void> {
+    await this.password.fill(password); 
+  }
+  async clickLoginButton(): Promise<void> {
+    await this.btnLogin.click();
+  }
 
-    async clickLoginButton(): Promise<void> {
-      await this.btnLogin.click();
-    }
+//assertion Methods
+
 
 }
 
