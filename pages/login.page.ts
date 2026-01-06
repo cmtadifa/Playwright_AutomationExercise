@@ -42,17 +42,16 @@ export class LoginPage {
     await expect(this.loginerror).toHaveText('Your email or password is incorrect!');
   }
 
-  async expectInvalidEmail(): Promise<void> {
+  async expectLoginError(errorMessage: string): Promise<void> {
     const validationMessage = await this.eAddress.evaluate((el: HTMLInputElement) => el.validationMessage);
-    expect(validationMessage).toContain("Please include an '@' in the email address.");
+    if (errorMessage === "Invalid email") {
+      expect(validationMessage).toContain("Please include an '@' in the email address.");
+    } else if (errorMessage === "Empty email") {
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty password"){
+      const validationMessage = await this.password.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    }
+
   }
-
-  async expectEmptyEmail(): Promise<void> {
-    const validationMessage = await this.eAddress.evaluate((el: HTMLInputElement) => el.validationMessage);
-    expect(validationMessage).toContain("Please fill out this field.");
-  }
-
-
 }
-
-
