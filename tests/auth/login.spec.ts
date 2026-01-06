@@ -37,23 +37,15 @@ test.describe('User Login', () => {
         await lpage.expectLoginError("Invalid email");
       });
 
-      test('Login with empty email', async ({page}) => {
+      test('Login with empty email', async () => {
         await lpage.enterPasswordField(userData.user3.password);
         await lpage.clickLoginButton();
         await lpage.expectLoginError("Empty email");
       });
 
-      test('Login with empty password', async ({ page }) => {
+      test('Login with empty password', async () => {
         await lpage.enterUsernameField(userData.user3.email);
         await lpage.clickLoginButton();
         await lpage.expectLoginError("Empty password");
       });
-
-      // test('Login with both empty', async ({ page }) => {
-      //   // test code here
-      // });
-
-      // test('Login multiple times with invalid account', async ({ page }) => {
-      //   // test code here
-      // });
 });
