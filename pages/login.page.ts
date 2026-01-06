@@ -8,6 +8,7 @@ export class LoginPage {
   private readonly btnLogin: Locator; 
   private readonly loginerror: Locator;
 
+
 // constructor
   constructor(private readonly page: Page) {
     this.page = page;
@@ -18,8 +19,11 @@ export class LoginPage {
     this.password = loginForm.getByRole('textbox', { name: 'Password' });
     this.btnLogin = page.getByRole('button', { name: 'Login' });
     this.loginerror = loginForm.getByText('Your email or password is incorrect!');
+    
   }
 
+
+//function Methods
   async enterUsernameField(userName: string): Promise<void> {
     await this.eAddress.fill(userName); 
   }
@@ -37,6 +41,12 @@ export class LoginPage {
     await expect(this.loginerror).toBeVisible();
     await expect(this.loginerror).toHaveText('Your email or password is incorrect!');
   }
+
+  async expectInvalidEmail(): Promise<void> {
+    const validationMessage = await this.eAddress.evaluate((el: HTMLInputElement) => el.validationMessage);
+    expect(validationMessage).toContain("Please include an '@' in the email address.");
+  }
+
 
 }
 

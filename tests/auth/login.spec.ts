@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect} from '@playwright/test';
 import userData from '../../fixtures/userData.json';
 import { HomePage } from '../../pages/home.page';
 import { LoginPage } from '../../pages/login.page';
@@ -23,16 +23,19 @@ test.describe('User Login', () => {
         await hpage.expectNavLinkVisible('Logout');
       });
 
-      test('Login with invalid email and password', async () => {
+      test('Login with invalid password', async () => {
         await lpage.enterUsernameField(userData.user2.email);
         await lpage.enterPasswordField(userData.user2.password);
         await lpage.clickLoginButton();
         await lpage.expectLoginErrorVisible();
       });
 
-      // test('Login with invalid email', async ({ page }) => {
-      //   // test code here
-      // });
+      test('Login with invalid email', async () => {
+        await lpage.enterUsernameField(userData.user3.email);
+        await lpage.enterPasswordField(userData.user3.password);
+        await lpage.clickLoginButton();
+        await lpage.expectInvalidEmail();
+      });
 
       // test('Login with empty email', async ({ page }) => {
       //   // test code here
