@@ -37,9 +37,12 @@ test.describe('User Login', () => {
         await lpage.expectInvalidEmail();
       });
 
-      // test('Login with empty email', async ({ page }) => {
-      //   // test code here
-      // });
+      test('Login with empty email', async ({page}) => {
+        await lpage.enterPasswordField(userData.user3.password);
+        await lpage.clickLoginButton();
+        await lpage.expectEmptyEmail();
+        await page.pause();
+      });
 
       // test('Login with empty password', async ({ page }) => {
       //   // test code here

@@ -47,6 +47,11 @@ export class LoginPage {
     expect(validationMessage).toContain("Please include an '@' in the email address.");
   }
 
+  async expectEmptyEmail(): Promise<void> {
+    const validationMessage = await this.eAddress.evaluate((el: HTMLInputElement) => el.validationMessage);
+    expect(validationMessage).toContain("Please fill out this field.");
+  }
+
 
 }
 
