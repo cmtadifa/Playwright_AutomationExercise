@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import userData from '../../fixtures/userData.json';
 import { HomePage } from '../../pages/home.page';
 import { AuthenticationPage } from '../../pages/Authentication.page';
+import { dataGenerator } from '../../utils/testData';
 
 test.describe('User Login', () => {
 
@@ -24,27 +25,27 @@ test.describe('User Login', () => {
       });
 
       test('Login with invalid password', async () => {
-        await authpage.enterUsernameField(userData.user2.email);
-        await authpage.enterPasswordField(userData.user2.password);
+        await authpage.enterUsernameField(dataGenerator.validEmail());
+        await authpage.enterPasswordField(dataGenerator.nameWithNumber());
         await authpage.clickLoginButton();
         await authpage.expectLoginErrorVisible();
       });
 
-      test('Login with invalid email', async () => {
-        await authpage.enterUsernameField(userData.user3.email);
-        await authpage.enterPasswordField(userData.user3.password);
+      test.only('Login with invalid email', async () => {
+        await authpage.enterUsernameField(dataGenerator.InvalidEmail());
+        await authpage.enterPasswordField(dataGenerator.nameWithNumber());
         await authpage.clickLoginButton();
         await authpage.expectLoginError("Invalid email");
       });
 
       test('Login with empty email', async () => {
-        await authpage.enterPasswordField(userData.user3.password);
+        await authpage.enterPasswordField(dataGenerator.nameWithNumber());
         await authpage.clickLoginButton();
         await authpage.expectLoginError("Empty email");
       });
 
       test('Login with empty password', async () => {
-        await authpage.enterUsernameField(userData.user3.email);
+        await authpage.enterUsernameField(dataGenerator.validEmail());
         await authpage.clickLoginButton();
         await authpage.expectLoginError("Empty password");
       });

@@ -36,8 +36,7 @@ playwright-ecommerce-automation/
 │
 ├── pages/                  # Page Objects
 │   ├── home.page.ts
-│   ├── login.page.ts
-│   ├── register.page.ts
+│   ├── authentication.page.ts
 │   ├── product.page.ts
 │   ├── cart.page.ts
 │   └── checkout.page.ts

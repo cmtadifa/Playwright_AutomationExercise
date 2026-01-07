@@ -5,19 +5,5 @@
         "Lname": "Test",
         "email": "migstest123@email.com",
         "password": "migstest123"
-    },
-    "user2": {
-        "id": 2,
-        "Fname": "John",
-        "Lname": "Doe",
-        "email": "johndoe@email.com",
-        "password": "johndoe123"
-    },
-    "user3": {
-        "id": 3,
-        "Fname": "Alice",
-        "Lname": "Smith",  
-        "email": "alicesmithemail.com",
-        "password": "alicesmith123"
     }
 }
