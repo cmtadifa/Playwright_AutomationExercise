@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 
-export class LoginPage {
+export class AuthenticationPage {
 
 //Locators class properties 
   private readonly eAddress: Locator;
