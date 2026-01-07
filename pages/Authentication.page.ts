@@ -7,10 +7,10 @@ export class AuthenticationPage {
   private readonly loginPassword: Locator;
   private readonly loginBtnLogin: Locator; 
   private readonly loginError: Locator;
-  private readonly nameField: Locator;
-  private readonly emailField: Locator ;
+  private readonly regNameField: Locator;
+  private readonly regEmailField: Locator ;
   private readonly btnSignup: Locator;
-  private readonly registrationError: Locator;
+  private readonly regError: Locator;
 
 
 // constructor
@@ -26,19 +26,19 @@ export class AuthenticationPage {
     
     //Register Locators
     const regForm = page.locator('form', { hasText: 'signup' });
-    this.nameField = regForm.getByRole('textbox', { name: 'Name' });
-    this.emailField = regForm.getByRole('textbox', { name: 'Email Address' });
+    this.regNameField = regForm.getByRole('textbox', { name: 'Name' });
+    this.regEmailField = regForm.getByRole('textbox', { name: 'Email Address' });
     this.btnSignup = page.getByRole('button', { name: 'Signup' });
-    this.registrationError = regForm.getByText('Email Address already exist!');
+    this.regError = regForm.getByText('Email Address already exist!');
   }
 
 
 //function Methods
-  async enterUsernameField(userName: string): Promise<void> {
+  async enterLoginEmailField(userName: string): Promise<void> {
     await this.logineAddress.fill(userName); 
   }
 
-  async enterPasswordField(password: string): Promise<void> {
+  async enterLoginPasswordField(password: string): Promise<void> {
     await this.loginPassword.fill(password); 
   }
 

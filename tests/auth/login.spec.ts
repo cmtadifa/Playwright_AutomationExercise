@@ -18,34 +18,34 @@ test.describe('User Login', () => {
 
 
       test('should login with valid credentials', async () => {
-        await authpage.enterUsernameField(userData.user1.email);
-        await authpage.enterPasswordField(userData.user1.password);
+        await authpage.enterLoginEmailField(userData.user1.email);
+        await authpage.enterLoginPasswordField(userData.user1.password);
         await authpage.clickLoginButton();
         await hpage.expectNavLinkVisible('Logout');
       });
 
       test('Login with invalid password', async () => {
-        await authpage.enterUsernameField(dataGenerator.validEmail());
-        await authpage.enterPasswordField(dataGenerator.nameWithNumber());
+        await authpage.enterLoginEmailField(dataGenerator.validEmail());
+        await authpage.enterLoginPasswordField(dataGenerator.nameWithNumber());
         await authpage.clickLoginButton();
         await authpage.expectLoginErrorVisible();
       });
 
       test.only('Login with invalid email', async () => {
-        await authpage.enterUsernameField(dataGenerator.InvalidEmail());
-        await authpage.enterPasswordField(dataGenerator.nameWithNumber());
+        await authpage.enterLoginEmailField(dataGenerator.InvalidEmail());
+        await authpage.enterLoginPasswordField(dataGenerator.nameWithNumber());
         await authpage.clickLoginButton();
         await authpage.expectLoginError("Invalid email");
       });
 
       test('Login with empty email', async () => {
-        await authpage.enterPasswordField(dataGenerator.nameWithNumber());
+        await authpage.enterLoginPasswordField(dataGenerator.nameWithNumber());
         await authpage.clickLoginButton();
         await authpage.expectLoginError("Empty email");
       });
 
       test('Login with empty password', async () => {
-        await authpage.enterUsernameField(dataGenerator.validEmail());
+        await authpage.enterLoginEmailField(dataGenerator.validEmail());
         await authpage.clickLoginButton();
         await authpage.expectLoginError("Empty password");
       });
