@@ -5,11 +5,11 @@ export class AuthenticationPage {
 //Locators class properties 
   private readonly logineAddress: Locator;
   private readonly loginPassword: Locator;
-  private readonly loginBtnLogin: Locator; 
+  private readonly loginBtn: Locator; 
   private readonly loginError: Locator;
   private readonly regNameField: Locator;
   private readonly regEmailField: Locator ;
-  private readonly btnSignup: Locator;
+  private readonly regBtn: Locator;
   private readonly regError: Locator;
 
 
@@ -21,14 +21,14 @@ export class AuthenticationPage {
     const loginForm = page.locator('form', { hasText: 'Login' });
     this.logineAddress = loginForm.getByRole('textbox', { name: 'Email Address' });
     this.loginPassword = loginForm.getByRole('textbox', { name: 'Password' });
-    this.loginBtnLogin = page.getByRole('button', { name: 'Login' });
+    this.loginBtn = page.getByRole('button', { name: 'Login' });
     this.loginError = loginForm.getByText('Your email or password is incorrect!');
     
     //Register Locators
     const regForm = page.locator('form', { hasText: 'signup' });
     this.regNameField = regForm.getByRole('textbox', { name: 'Name' });
     this.regEmailField = regForm.getByRole('textbox', { name: 'Email Address' });
-    this.btnSignup = page.getByRole('button', { name: 'Signup' });
+    this.regBtn = page.getByRole('button', { name: 'Signup' });
     this.regError = regForm.getByText('Email Address already exist!');
   }
 
@@ -43,7 +43,19 @@ export class AuthenticationPage {
   }
 
   async clickLoginButton(): Promise<void> {
-    await this.loginBtnLogin.click();
+    await this.loginBtn.click();
+  }
+
+  async enterRegNameField(regName: string): Promise<void> {
+    await this.regNameField.fill(regName); 
+  }
+
+  async enterRegEmailField(regEmail: string): Promise<void> {
+    await this.regEmailField.fill(regEmail); 
+  }
+
+  async clickRegButton(): Promise<void> {
+    await this.regBtn.click();
   }
 
 //assertion Methods

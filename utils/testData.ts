@@ -12,6 +12,25 @@ export const dataGenerator = {
     return `${name}mail.com`;
   },
 
+//first name
+  firstname(): string {
+    const fname = faker.person.firstName().toLowerCase();
+    return fname;
+  },
+
+//last name
+  lastname(): string {
+    const lname = faker.person.lastName().toLowerCase();
+    return lname;
+  },
+
+//full name
+  fullname(): string {
+    const fname = faker.person.firstName().toLowerCase();
+    const lname = faker.person.lastName().toLowerCase();
+    return `${fname} ${lname}`;
+  }, 
+
 //name with number
   nameWithNumber(): string {
     const name = faker.internet.username().toLowerCase();

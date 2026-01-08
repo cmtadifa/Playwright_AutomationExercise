@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import userData from '../../fixtures/userData.json';
 import { HomePage } from '../../pages/home.page';
 import { AuthenticationPage } from '../../pages/Authentication.page';
+import { dataGenerator } from '../../utils/testData';
 
 test.describe('User Registration', () => {
 
@@ -16,8 +17,10 @@ test.describe('User Registration', () => {
       });
 
 
-      test('Register with valid data', async () => {
-        
+      test.only('Register with valid data', async ({page}) => {
+        await authpage.enterRegNameField(dataGenerator.fullname());
+        await authpage.enterRegEmailField(dataGenerator.validEmail());
+        await authpage.clickRegButton();
       });
 
       test('Empty required fields', async () => {
