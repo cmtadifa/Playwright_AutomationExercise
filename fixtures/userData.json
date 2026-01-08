@@ -5,5 +5,8 @@
         "Lname": "Test",
         "email": "migstest123@email.com",
         "password": "migstest123"
+    },
+    "user2": {
+        "password": "automationExercise!2026"
     }
 }

@@ -11,6 +11,15 @@ export class AuthenticationPage {
   private readonly regEmailField: Locator ;
   private readonly regBtn: Locator;
   private readonly regError: Locator;
+  private readonly regInfoRadiobtnMale: Locator;
+  private readonly regInfoRadiobtnFemale: Locator;
+  private readonly regInfoNameField: Locator;
+  private readonly  regInfoEmailField: Locator;
+  private readonly regInfoPassField: Locator;
+  private readonly regInfoDOBDays: Locator;
+  private readonly regInfoDOBMonths: Locator;
+  private readonly regInfoDOBYears: Locator;
+
 
 
 // constructor
@@ -30,6 +39,15 @@ export class AuthenticationPage {
     this.regEmailField = regForm.getByRole('textbox', { name: 'Email Address' });
     this.regBtn = page.getByRole('button', { name: 'Signup' });
     this.regError = regForm.getByText('Email Address already exist!');
+    this.regInfoRadiobtnMale = page.getByRole('radio', { name: 'Mr.' });
+    this.regInfoRadiobtnFemale = page.getByRole('radio', { name: 'Mrs.' });
+    this.regInfoNameField = page.getByRole('textbox', { name: 'Name *', exact: true });
+    this.regInfoEmailField = page.getByRole('textbox', { name: 'Email *', exact: true });
+    this.regInfoPassField = page.getByRole('textbox', { name: 'Password *', exact: true });
+    this.regInfoDOBDays = page.locator('#days');
+    this.regInfoDOBMonths = page.locator('#months');
+    this.regInfoDOBYears = page.locator('#years');
+
   }
 
 
@@ -58,6 +76,30 @@ export class AuthenticationPage {
     await this.regBtn.click();
   }
 
+  async selectRegRadioBtn(gender: string): Promise<void> {
+    if (gender === 'Mr') {
+      await this.regInfoRadiobtnMale.check();
+    } else {
+      await this.regInfoRadiobtnFemale.check();
+    }
+  }
+
+  async enterRegInfoPassword(password: string): Promise<void> {
+    await this.regInfoPassField.fill(password);
+  }
+
+  async selectRegInfoDOBDays(day: number): Promise<void> {
+    await this.regInfoDOBDays.selectOption(day.toString());
+  }
+
+  async selectRegInfoDOBMonths(month: string): Promise<void> {
+    await this.regInfoDOBMonths.selectOption(month);
+  }
+
+  async selectRegInfoDOByears(year: number): Promise<void> {
+    await this.regInfoDOBYears.selectOption(year.toString());
+  }
+
 //assertion Methods
   async expectLoginErrorVisible(): Promise<void> {
     await expect(this.loginError).toBeVisible();
@@ -74,6 +116,18 @@ export class AuthenticationPage {
       const validationMessage = await this.loginPassword.evaluate((el: HTMLInputElement) => el.validationMessage);
       expect(validationMessage).toContain("Please fill out this field.");
     }
-
   }
+
+  async expectRegInfoName(expectedName: string): Promise<void> {
+    const nameValue = await this.regInfoNameField.inputValue();
+    expect(nameValue).toBe(expectedName);
+  }
+
+  async expectRegInfoEmail(expectedEmail: string): Promise<void> {
+    const emailValue = await this.regInfoEmailField.inputValue();
+    expect(emailValue).toBe(expectedEmail);
+  }
+
+  
+
 }

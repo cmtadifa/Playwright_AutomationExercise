@@ -31,6 +31,11 @@ export const dataGenerator = {
     return `${fname} ${lname}`;
   }, 
 
+//password
+  password(): string {
+    return faker.internet.password({ length: 10, pattern: /[A-Za-z0-9@$!%*?&]/ });
+  },
+
 //name with number
   nameWithNumber(): string {
     const name = faker.internet.username().toLowerCase();
@@ -42,5 +47,16 @@ export const dataGenerator = {
   nameWithSymbols(): string {
     const name = faker.internet.username().toLowerCase();
     return `${name}._@#^-${faker.number.int(99)}`;
-  }
+  },
+
+//random birthday
+  randomBirthday(): { day: number; month: string; year: number } {
+  const day = faker.number.int({ min: 1, max: 31 });
+  const month = faker.date.month();  // returns "January", "February", etc.
+  const year = faker.number.int({ min: 1900, max: 2023 });
+  
+  return { day, month, year };
+}
+
+
 };

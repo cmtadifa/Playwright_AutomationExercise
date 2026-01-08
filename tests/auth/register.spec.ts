@@ -4,6 +4,7 @@ import { HomePage } from '../../pages/home.page';
 import { AuthenticationPage } from '../../pages/Authentication.page';
 import { dataGenerator } from '../../utils/testData';
 
+
 test.describe('User Registration', () => {
 
   let hpage: HomePage;
@@ -18,9 +19,21 @@ test.describe('User Registration', () => {
 
 
       test.only('Register with valid data', async ({page}) => {
-        await authpage.enterRegNameField(dataGenerator.fullname());
-        await authpage.enterRegEmailField(dataGenerator.validEmail());
+        const user = dataGenerator.fullname();
+        const email = dataGenerator.validEmail();
+        const bday = dataGenerator.randomBirthday();
+        await authpage.enterRegNameField(user);
+        await authpage.enterRegEmailField(email);
         await authpage.clickRegButton();
+        await authpage.selectRegRadioBtn('Mr');
+        await authpage.expectRegInfoName(user);
+        await authpage.expectRegInfoEmail(email);
+        await authpage.enterRegInfoPassword(userData.user2.password);
+        await authpage.selectRegInfoDOBDays(bday.day);
+        await authpage.selectRegInfoDOBMonths(bday.month);
+        await authpage.selectRegInfoDOByears(bday.year);
+
+        await page.pause();
       });
 
       test('Empty required fields', async () => {
