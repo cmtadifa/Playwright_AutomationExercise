@@ -19,6 +19,18 @@ export class AuthenticationPage {
   private readonly regInfoDOBDays: Locator;
   private readonly regInfoDOBMonths: Locator;
   private readonly regInfoDOBYears: Locator;
+  private readonly regInfoFnameField: Locator;
+  private readonly regInfoLnameField: Locator;
+  private readonly regInfocompanyField: Locator;
+  private readonly regInfoAddress1Field: Locator
+  private readonly regInfoAddress2Field: Locator;
+  private readonly regInfoCountryField: Locator
+  private readonly regInfoStateField: Locator;
+  private readonly regInfoCityField: Locator
+  private readonly regInfoZipcodeField: Locator;
+  private readonly regInfoMobileNumberField: Locator;
+  private readonly regInfoCreateAccountBtn: Locator;
+  private readonly accCreated: Locator;
 
 
 
@@ -47,7 +59,18 @@ export class AuthenticationPage {
     this.regInfoDOBDays = page.locator('#days');
     this.regInfoDOBMonths = page.locator('#months');
     this.regInfoDOBYears = page.locator('#years');
-
+    this.regInfoFnameField = page.getByRole('textbox', { name: 'First name *'});
+    this.regInfoLnameField = page.getByRole('textbox', { name: 'Last name *'});
+    this.regInfocompanyField = page.getByRole('textbox', { name: 'Company', exact: true});
+    this.regInfoAddress1Field = page.getByRole('textbox', { name: 'Address *'});
+    this.regInfoAddress2Field = page.getByRole('textbox', { name: 'Address 2'});
+    this.regInfoCountryField = page.locator('#country');
+    this.regInfoStateField = page.getByRole('textbox', { name: 'State *'});
+    this.regInfoCityField = page.getByRole('textbox', { name: 'City * Zipcode *'});
+    this.regInfoZipcodeField = page.locator('#zipcode');
+    this.regInfoMobileNumberField = page.getByRole('textbox', { name: 'Mobile Number *'});
+    this.regInfoCreateAccountBtn = page.getByRole('button', { name: 'Create Account' });
+    this.accCreated = page.getByText('Account Created!');
   }
 
 
@@ -100,6 +123,51 @@ export class AuthenticationPage {
     await this.regInfoDOBYears.selectOption(year.toString());
   }
 
+  async enterRegInfoFirstName(fname: string): Promise<void> {
+    await this.regInfoFnameField.fill(fname);
+  }
+
+  async enterRegInfoLastName(lname: string): Promise<void> {
+    await this.regInfoLnameField.fill(lname);
+  }
+
+  async enterRegInfoCompany(company: string): Promise<void> {
+    await this.regInfocompanyField.fill(company);
+  }
+
+  async enterRegInfoAddress1(address1: string): Promise<void> {
+    await this.regInfoAddress1Field.fill(address1);
+  }
+
+  async enterRegInfoAddress2(address2: string): Promise<void> {
+    await this.regInfoAddress2Field.fill(address2);
+  }
+
+  async selectRegInfoCountry(country: number): Promise<void> {
+    await this.regInfoCountryField.selectOption({index: country});
+  }
+
+  async enterRegInfoState(state: string): Promise<void> {
+    await this.regInfoStateField.fill(state);
+  }
+
+  async enterRegInfoCity(city: string): Promise<void> {
+    await this.regInfoCityField.fill(city);
+  }
+
+  async enterRegInfoZipcode(zipcode: string): Promise<void> {
+    await this.regInfoZipcodeField.fill(zipcode);
+  }
+
+  async enterRegInfoMNumber(mNumber: string): Promise<void> {
+    await this.regInfoMobileNumberField.fill(mNumber);
+  }
+
+  async clickCreateAccBtn(): Promise<void> {
+    await this.regInfoCreateAccountBtn.click();
+  }
+
+
 //assertion Methods
   async expectLoginErrorVisible(): Promise<void> {
     await expect(this.loginError).toBeVisible();
@@ -128,6 +196,9 @@ export class AuthenticationPage {
     expect(emailValue).toBe(expectedEmail);
   }
 
+  async expectAccountCreated(): Promise<void> {
+    await expect(this.accCreated).toBeVisible();
+  }
   
 
 }

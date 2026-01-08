@@ -19,21 +19,32 @@ test.describe('User Registration', () => {
 
 
       test.only('Register with valid data', async ({page}) => {
-        const user = dataGenerator.fullname();
+        const user = dataGenerator.fullName();
         const email = dataGenerator.validEmail();
         const bday = dataGenerator.randomBirthday();
-        await authpage.enterRegNameField(user);
+        const randomCountry = Math.floor(Math.random() * 7);
+        await authpage.enterRegNameField(user.full);
         await authpage.enterRegEmailField(email);
         await authpage.clickRegButton();
         await authpage.selectRegRadioBtn('Mr');
-        await authpage.expectRegInfoName(user);
+        await authpage.expectRegInfoName(user.full);
         await authpage.expectRegInfoEmail(email);
         await authpage.enterRegInfoPassword(userData.user2.password);
         await authpage.selectRegInfoDOBDays(bday.day);
         await authpage.selectRegInfoDOBMonths(bday.month);
         await authpage.selectRegInfoDOByears(bday.year);
-
-        await page.pause();
+        await authpage.enterRegInfoFirstName(user.first);
+        await authpage.enterRegInfoLastName(user.last);
+        await authpage.enterRegInfoCompany(dataGenerator.companyName());
+        await authpage.enterRegInfoAddress1(dataGenerator.address1());
+        await authpage.enterRegInfoAddress2(dataGenerator.address2());
+        await authpage.selectRegInfoCountry(randomCountry);
+        await authpage.enterRegInfoState(dataGenerator.state());
+        await authpage.enterRegInfoCity(dataGenerator.city());
+        await authpage.enterRegInfoZipcode(dataGenerator.zipcode());
+        await authpage.enterRegInfoMNumber(dataGenerator.mobile());
+        await authpage.clickCreateAccBtn();
+        await authpage.expectAccountCreated();
       });
 
       test('Empty required fields', async () => {

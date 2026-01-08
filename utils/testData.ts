@@ -25,11 +25,12 @@ export const dataGenerator = {
   },
 
 //full name
-  fullname(): string {
-    const fname = faker.person.firstName().toLowerCase();
-    const lname = faker.person.lastName().toLowerCase();
-    return `${fname} ${lname}`;
-  }, 
+  fullName(): { full: string; first: string; last: string } {
+    const first = faker.person.firstName().toLowerCase();
+    const last = faker.person.lastName().toLowerCase();
+    const full = `${first} ${last}`;
+    return { full, first, last };
+  },
 
 //password
   password(): string {
@@ -56,7 +57,35 @@ export const dataGenerator = {
   const year = faker.number.int({ min: 1900, max: 2023 });
   
   return { day, month, year };
-}
+  },
 
+//random company name
+  companyName(): string {
+    return faker.company.name();
+  },
+
+  address1(): string {
+    return faker.location.streetAddress();
+  },
+
+  address2(): string {
+    return faker.location.secondaryAddress();
+  },
+
+  zipcode(): string {
+    return faker.location.zipCode();
+  },
+
+  state(): string {
+    return faker.location.state();
+  },
+
+  city(): string {
+    return faker.location.city();
+  },
+
+  mobile(): string {
+    return faker.phone.number({ style: 'national' }); // 10-digit
+  }
 
 };
