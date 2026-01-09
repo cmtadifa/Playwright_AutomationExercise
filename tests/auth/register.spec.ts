@@ -18,7 +18,7 @@ test.describe('User Registration', () => {
       });
 
 
-      test.only('Register with valid data', async ({page}) => {
+      test('Register with valid data', async ({page}) => {
         const user = dataGenerator.fullName();
         const email = dataGenerator.validEmail();
         const bday = dataGenerator.randomBirthday();
