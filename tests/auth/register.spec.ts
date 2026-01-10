@@ -9,20 +9,21 @@ test.describe('User Registration', () => {
 
   let hpage: HomePage;
   let authpage: AuthenticationPage;
+  const user = dataGenerator.fullName();
+  const email = dataGenerator.validEmail();
+  const bday = dataGenerator.randomBirthday();
+  const randomCountry = Math.floor(Math.random() * 7);
 
     test.beforeEach(async ({ page }) => {
         hpage = new HomePage(page);
         authpage = new AuthenticationPage(page);
         await hpage.accessPage();
         await hpage.clickNavLinks('Login');
+        
       });
 
 
       test('Register with valid data', async ({page}) => {
-        const user = dataGenerator.fullName();
-        const email = dataGenerator.validEmail();
-        const bday = dataGenerator.randomBirthday();
-        const randomCountry = Math.floor(Math.random() * 7);
         await authpage.enterRegNameField(user.full);
         await authpage.enterRegEmailField(email);
         await authpage.clickRegButton();
@@ -47,7 +48,13 @@ test.describe('User Registration', () => {
         await authpage.expectAccountCreated();
       });
 
-      test('Empty required fields', async () => {
+      test('Empty Front Register Name field', async () => {
+        await authpage.enterRegEmailField(email);
+        await authpage.clickRegButton();
+        await authpage.expectRegisterError('Empty name');
+      });
+
+      test('Empty Front Register Email field', async () => {
         
       });
 

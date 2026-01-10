@@ -200,5 +200,15 @@ export class AuthenticationPage {
     await expect(this.accCreated).toBeVisible();
   }
   
-
+  async expectRegisterError(errorMessage: string): Promise<void> {
+    const validationMessage = await this.regEmailField.evaluate((el: HTMLInputElement) => el.validationMessage);
+    if (errorMessage === "Invalid email") {
+      expect(validationMessage).toContain("Please include an '@' in the email address.");
+    } else if (errorMessage === "Empty email") {
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty name") {
+      const validationMessage = await this.regNameField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    }
+  }
 }
