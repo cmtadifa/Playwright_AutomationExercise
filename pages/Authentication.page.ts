@@ -10,7 +10,7 @@ export class AuthenticationPage {
   private readonly regNameField: Locator;
   private readonly regEmailField: Locator ;
   private readonly regBtn: Locator;
-  private readonly regError: Locator;
+  private readonly regExistingEmailError: Locator;
   private readonly regInfoRadiobtnMale: Locator;
   private readonly regInfoRadiobtnFemale: Locator;
   private readonly regInfoNameField: Locator;
@@ -50,7 +50,7 @@ export class AuthenticationPage {
     this.regNameField = regForm.getByRole('textbox', { name: 'Name' });
     this.regEmailField = regForm.getByRole('textbox', { name: 'Email Address' });
     this.regBtn = page.getByRole('button', { name: 'Signup' });
-    this.regError = regForm.getByText('Email Address already exist!');
+    this.regExistingEmailError = regForm.getByText('Email Address already exist!');
     this.regInfoRadiobtnMale = page.getByRole('radio', { name: 'Mr.' });
     this.regInfoRadiobtnFemale = page.getByRole('radio', { name: 'Mrs.' });
     this.regInfoNameField = page.getByRole('textbox', { name: 'Name *', exact: true });
@@ -210,5 +210,10 @@ export class AuthenticationPage {
       const validationMessage = await this.regNameField.evaluate((el: HTMLInputElement) => el.validationMessage);
       expect(validationMessage).toContain("Please fill out this field.");
     }
+  }
+
+  async expectRegisterExistingEmailError(): Promise<void> {
+    await expect(this.regExistingEmailError).toBeVisible();
+    await expect(this.regExistingEmailError).toHaveText('Email Address already exist!');
   }
 }

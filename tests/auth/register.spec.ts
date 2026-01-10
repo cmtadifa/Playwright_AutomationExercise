@@ -60,18 +60,21 @@ test.describe('User Registration', () => {
         await authpage.expectRegisterError('Empty email');
       });
 
-      test.only('Invalid Front Register Email field', async () => {
+      test('Invalid Front Register Email field', async () => {
         await authpage.enterRegNameField(user.full);
         await authpage.enterRegEmailField(dataGenerator.InvalidEmail());
         await authpage.clickRegButton();
         await authpage.expectRegisterError('Invalid email');
       });
 
-      test('Invalid email format', async () => {
-   
+      test('Existing email already registered', async () => {
+        await authpage.enterRegNameField(userData.user1.Fname + ' ' + userData.user1.Lname);
+        await authpage.enterRegEmailField(userData.user1.email);
+        await authpage.clickRegButton();
+        await authpage.expectRegisterExistingEmailError();
       });
 
-      test('Existing email already registered', async () => {
+      test('', async () => {
        
       });
 
