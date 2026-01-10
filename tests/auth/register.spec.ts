@@ -55,7 +55,9 @@ test.describe('User Registration', () => {
       });
 
       test('Empty Front Register Email field', async () => {
-        
+        await authpage.enterRegNameField(user.full);
+        await authpage.clickRegButton();
+        await authpage.expectRegisterError('Empty email');
       });
 
       test('Invalid email format', async () => {
