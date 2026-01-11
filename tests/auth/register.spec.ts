@@ -74,8 +74,33 @@ test.describe('User Registration', () => {
         await authpage.expectRegisterExistingEmailError();
       });
 
-      test('', async () => {
-       
+      test('Empty Required Fields', async () => {
+        await authpage.enterRegNameField(user.full);
+        await authpage.enterRegEmailField(email);
+        await authpage.clickRegButton();
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty password');
+        await authpage.enterRegInfoPassword(userData.user2.password);
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty fname');
+        await authpage.enterRegInfoFirstName(user.first);
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty lname');
+        await authpage.enterRegInfoLastName(user.last);
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty address1');
+        await authpage.enterRegInfoAddress1(dataGenerator.address1());
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty state');
+        await authpage.enterRegInfoState(dataGenerator.state());
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty city');
+        await authpage.enterRegInfoCity(dataGenerator.city());
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty zipcode');
+        await authpage.enterRegInfoZipcode(dataGenerator.zipcode());
+        await authpage.clickCreateAccBtn();
+        await authpage.expectRegisterError('Empty mobile');
       });
 
       test('Login with empty password', async () => {

@@ -201,13 +201,39 @@ export class AuthenticationPage {
   }
   
   async expectRegisterError(errorMessage: string): Promise<void> {
-    const validationMessage = await this.regEmailField.evaluate((el: HTMLInputElement) => el.validationMessage);
+    
     if (errorMessage === "Invalid email") {
+      const validationMessage = await this.regEmailField.evaluate((el: HTMLInputElement) => el.validationMessage);
       expect(validationMessage).toContain("Please include an '@' in the email address.");
     } else if (errorMessage === "Empty email") {
+      const validationMessage = await this.regEmailField.evaluate((el: HTMLInputElement) => el.validationMessage);
       expect(validationMessage).toContain("Please fill out this field.");
     } else if (errorMessage === "Empty name") {
       const validationMessage = await this.regNameField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty password") {
+      const validationMessage = await this.regInfoPassField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty fname") {
+      const validationMessage = await this.regInfoFnameField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty lname") {
+      const validationMessage = await this.regInfoLnameField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty address1") {
+      const validationMessage = await this.regInfoAddress1Field.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty state") {
+      const validationMessage = await this.regInfoStateField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty city") {
+      const validationMessage = await this.regInfoCityField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty zipcode") {
+      const validationMessage = await this.regInfoZipcodeField.evaluate((el: HTMLInputElement) => el.validationMessage);
+      expect(validationMessage).toContain("Please fill out this field.");
+    } else if (errorMessage === "Empty mobile") {
+      const validationMessage = await this.regInfoMobileNumberField.evaluate((el: HTMLInputElement) => el.validationMessage);
       expect(validationMessage).toContain("Please fill out this field.");
     }
   }
@@ -216,4 +242,6 @@ export class AuthenticationPage {
     await expect(this.regExistingEmailError).toBeVisible();
     await expect(this.regExistingEmailError).toHaveText('Email Address already exist!');
   }
+
+  
 }
