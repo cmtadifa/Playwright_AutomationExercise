@@ -102,8 +102,4 @@ test.describe('User Registration', () => {
         await authpage.clickCreateAccBtn();
         await authpage.expectRegisterError('Empty mobile');
       });
-
-      test('Login with empty password', async () => {
-       
-      });
 });
