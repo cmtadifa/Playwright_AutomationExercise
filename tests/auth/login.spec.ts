@@ -1,55 +1,52 @@
-import { test, expect} from '@playwright/test';
+import { test } from '@playwright/test';
 import userData from '../../fixtures/userData.json';
 import { HomePage } from '../../pages/home.page';
-import { LoginPage } from '../../pages/login.page';
+import { AuthenticationPage } from '../../pages/Authentication.page';
+import { dataGenerator } from '../../utils/testData';
 
 test.describe('User Login', () => {
 
   let hpage: HomePage;
-  let lpage: LoginPage;
+  let authpage: AuthenticationPage;
 
     test.beforeEach(async ({ page }) => {
         hpage = new HomePage(page);
-        lpage = new LoginPage(page);
+        authpage = new AuthenticationPage(page);
         await hpage.accessPage();
         await hpage.clickNavLinks('Login');
       });
 
 
       test('should login with valid credentials', async () => {
-        await lpage.enterUsernameField(userData.user1.email);
-        await lpage.enterPasswordField(userData.user1.password);
-        await lpage.clickLoginButton();
+        await authpage.enterLoginEmailField(userData.user1.email);
+        await authpage.enterLoginPasswordField(userData.user1.password);
+        await authpage.clickLoginButton();
         await hpage.expectNavLinkVisible('Logout');
       });
 
       test('Login with invalid password', async () => {
-        await lpage.enterUsernameField(userData.user2.email);
-        await lpage.enterPasswordField(userData.user2.password);
-        await lpage.clickLoginButton();
-        await lpage.expectLoginErrorVisible();
+        await authpage.enterLoginEmailField(dataGenerator.validEmail());
+        await authpage.enterLoginPasswordField(dataGenerator.nameWithNumber());
+        await authpage.clickLoginButton();
+        await authpage.expectLoginErrorVisible();
       });
 
-      test('Login with invalid email', async () => {
-        await lpage.enterUsernameField(userData.user3.email);
-        await lpage.enterPasswordField(userData.user3.password);
-        await lpage.clickLoginButton();
-        await lpage.expectInvalidEmail();
+      test.only('Login with invalid email', async () => {
+        await authpage.enterLoginEmailField(dataGenerator.InvalidEmail());
+        await authpage.enterLoginPasswordField(dataGenerator.nameWithNumber());
+        await authpage.clickLoginButton();
+        await authpage.expectLoginError("Invalid email");
       });
 
-      // test('Login with empty email', async ({ page }) => {
-      //   // test code here
-      // });
+      test('Login with empty email', async () => {
+        await authpage.enterLoginPasswordField(dataGenerator.nameWithNumber());
+        await authpage.clickLoginButton();
+        await authpage.expectLoginError("Empty email");
+      });
 
-      // test('Login with empty password', async ({ page }) => {
-      //   // test code here
-      // });
-
-      // test('Login with both empty', async ({ page }) => {
-      //   // test code here
-      // });
-
-      // test('Login multiple times with invalid account', async ({ page }) => {
-      //   // test code here
-      // });
+      test('Login with empty password', async () => {
+        await authpage.enterLoginEmailField(dataGenerator.validEmail());
+        await authpage.clickLoginButton();
+        await authpage.expectLoginError("Empty password");
+      });
 });
