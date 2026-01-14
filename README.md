@@ -44,7 +44,7 @@ playwright-ecommerce-automation/
 ├── fixtures/
 │   └── userData.json
 ├── utils/
-│   └── testHelper.ts
+│   └── testData.ts
 ├── playwright.config.ts
 ├── package.json
 ├── .gitignore
