@@ -84,16 +84,21 @@ playwright-ecommerce-automation/
 npm install
 ```
 
-### 2️⃣ Install Dependencies
+### 2️⃣ Install Playwright browsers
+```bash
+npx playwright install
+```
+
+### 3️⃣ Run tests
 ```bash
 npx playwright test
 ```
 
-### 2️⃣ Install Dependencies
+### 4️⃣ Run tests in UI mode
 ```bash
 npx playwright test --ui
 ```
-### 4️⃣ View HTML Report
+### 5️⃣ View HTML report
 ```bash
 npx playwright show-report
 ```
