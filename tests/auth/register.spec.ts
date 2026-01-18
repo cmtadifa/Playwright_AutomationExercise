@@ -1,105 +1,99 @@
-import { test } from '@playwright/test';
+import { test } from '../../utils/base';
 import userData from '../../fixtures/userData.json';
-import { HomePage } from '../../pages/home.page';
-import { AuthenticationPage } from '../../pages/Authentication.page';
 import { dataGenerator } from '../../utils/testData';
 
 
 test.describe('User Registration', () => {
 
-  let hpage: HomePage;
-  let authpage: AuthenticationPage;
   const user = dataGenerator.fullName();
   const email = dataGenerator.validEmail();
   const bday = dataGenerator.randomBirthday();
   const randomCountry = Math.floor(Math.random() * 7);
 
-    test.beforeEach(async ({ page }) => {
-        hpage = new HomePage(page);
-        authpage = new AuthenticationPage(page);
-        await hpage.accessPage();
-        await hpage.clickNavLinks('Login');
+    test.beforeEach(async ({ homePage }) => {
+        await homePage.accessPage();
+        await homePage.clickNavLinks('Login');
         
       });
 
 
-      test('Register with valid data', async ({page}) => {
-        await authpage.enterRegNameField(user.full);
-        await authpage.enterRegEmailField(email);
-        await authpage.clickRegButton();
-        await authpage.selectRegRadioBtn('Mr');
-        await authpage.expectRegInfoName(user.full);
-        await authpage.expectRegInfoEmail(email);
-        await authpage.enterRegInfoPassword(userData.user2.password);
-        await authpage.selectRegInfoDOBDays(bday.day);
-        await authpage.selectRegInfoDOBMonths(bday.month);
-        await authpage.selectRegInfoDOByears(bday.year);
-        await authpage.enterRegInfoFirstName(user.first);
-        await authpage.enterRegInfoLastName(user.last);
-        await authpage.enterRegInfoCompany(dataGenerator.companyName());
-        await authpage.enterRegInfoAddress1(dataGenerator.address1());
-        await authpage.enterRegInfoAddress2(dataGenerator.address2());
-        await authpage.selectRegInfoCountry(randomCountry);
-        await authpage.enterRegInfoState(dataGenerator.state());
-        await authpage.enterRegInfoCity(dataGenerator.city());
-        await authpage.enterRegInfoZipcode(dataGenerator.zipcode());
-        await authpage.enterRegInfoMNumber(dataGenerator.mobile());
-        await authpage.clickCreateAccBtn();
-        await authpage.expectAccountCreated();
+      test('Register with valid data', async ({authPage}) => {
+        await authPage.enterRegNameField(user.full);
+        await authPage.enterRegEmailField(email);
+        await authPage.clickRegButton();
+        await authPage.selectRegRadioBtn('Mr');
+        await authPage.expectRegInfoName(user.full);
+        await authPage.expectRegInfoEmail(email);
+        await authPage.enterRegInfoPassword(userData.user2.password);
+        await authPage.selectRegInfoDOBDays(bday.day);
+        await authPage.selectRegInfoDOBMonths(bday.month);
+        await authPage.selectRegInfoDOByears(bday.year);
+        await authPage.enterRegInfoFirstName(user.first);
+        await authPage.enterRegInfoLastName(user.last);
+        await authPage.enterRegInfoCompany(dataGenerator.companyName());
+        await authPage.enterRegInfoAddress1(dataGenerator.address1());
+        await authPage.enterRegInfoAddress2(dataGenerator.address2());
+        await authPage.selectRegInfoCountry(randomCountry);
+        await authPage.enterRegInfoState(dataGenerator.state());
+        await authPage.enterRegInfoCity(dataGenerator.city());
+        await authPage.enterRegInfoZipcode(dataGenerator.zipcode());
+        await authPage.enterRegInfoMNumber(dataGenerator.mobile());
+        await authPage.clickCreateAccBtn();
+        await authPage.expectAccountCreated();
       });
 
-      test('Empty Front Register Name field', async () => {
-        await authpage.enterRegEmailField(email);
-        await authpage.clickRegButton();
-        await authpage.expectRegisterError('Empty name');
+      test('Empty Front Register Name field', async ({authPage}) => {
+        await authPage.enterRegEmailField(email);
+        await authPage.clickRegButton();
+        await authPage.expectRegisterError('Empty name');
       });
 
-      test('Empty Front Register Email field', async () => {
-        await authpage.enterRegNameField(user.full);
-        await authpage.clickRegButton();
-        await authpage.expectRegisterError('Empty email');
+      test('Empty Front Register Email field', async ({authPage}) => {
+        await authPage.enterRegNameField(user.full);
+        await authPage.clickRegButton();
+        await authPage.expectRegisterError('Empty email');
       });
 
-      test('Invalid Front Register Email field', async () => {
-        await authpage.enterRegNameField(user.full);
-        await authpage.enterRegEmailField(dataGenerator.InvalidEmail());
-        await authpage.clickRegButton();
-        await authpage.expectRegisterError('Invalid email');
+      test('Invalid Front Register Email field', async ({authPage}) => {
+        await authPage.enterRegNameField(user.full);
+        await authPage.enterRegEmailField(dataGenerator.InvalidEmail());
+        await authPage.clickRegButton();
+        await authPage.expectRegisterError('Invalid email');
       });
 
-      test('Existing email already registered', async () => {
-        await authpage.enterRegNameField(userData.user1.Fname + ' ' + userData.user1.Lname);
-        await authpage.enterRegEmailField(userData.user1.email);
-        await authpage.clickRegButton();
-        await authpage.expectRegisterExistingEmailError();
+      test('Existing email already registered', async ({authPage}) => {
+        await authPage.enterRegNameField(userData.user1.Fname + ' ' + userData.user1.Lname);
+        await authPage.enterRegEmailField(userData.user1.email);
+        await authPage.clickRegButton();
+        await authPage.expectRegisterExistingEmailError();
       });
 
-      test('Empty Required Fields', async () => {
-        await authpage.enterRegNameField(user.full);
-        await authpage.enterRegEmailField(email);
-        await authpage.clickRegButton();
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty password');
-        await authpage.enterRegInfoPassword(userData.user2.password);
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty fname');
-        await authpage.enterRegInfoFirstName(user.first);
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty lname');
-        await authpage.enterRegInfoLastName(user.last);
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty address1');
-        await authpage.enterRegInfoAddress1(dataGenerator.address1());
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty state');
-        await authpage.enterRegInfoState(dataGenerator.state());
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty city');
-        await authpage.enterRegInfoCity(dataGenerator.city());
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty zipcode');
-        await authpage.enterRegInfoZipcode(dataGenerator.zipcode());
-        await authpage.clickCreateAccBtn();
-        await authpage.expectRegisterError('Empty mobile');
+      test('Empty Required Fields', async ({authPage}) => {
+        await authPage.enterRegNameField(user.full);
+        await authPage.enterRegEmailField(email);
+        await authPage.clickRegButton();
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty password');
+        await authPage.enterRegInfoPassword(userData.user2.password);
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty fname');
+        await authPage.enterRegInfoFirstName(user.first);
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty lname');
+        await authPage.enterRegInfoLastName(user.last);
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty address1');
+        await authPage.enterRegInfoAddress1(dataGenerator.address1());
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty state');
+        await authPage.enterRegInfoState(dataGenerator.state());
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty city');
+        await authPage.enterRegInfoCity(dataGenerator.city());
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty zipcode');
+        await authPage.enterRegInfoZipcode(dataGenerator.zipcode());
+        await authPage.clickCreateAccBtn();
+        await authPage.expectRegisterError('Empty mobile');
       });
 });
